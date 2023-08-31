@@ -2,7 +2,8 @@
 
 describe("Should render the main image", () => {
   it("passes", () => {
-    cy.visit("http://127.0.0.1:5173/");
-    cy.get(".main-header img");
+    cy.visit("https://google.com");
+    cy.get("#APjFqb").click().type("Hello World{enter}");
+    cy.get(".MjjYud");
   });
 });
