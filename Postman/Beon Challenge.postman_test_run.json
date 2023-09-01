@@ -1,0 +1,648 @@
+{
+	"id": "501a0429-7785-458a-902d-2d591d056782",
+	"name": "Beon Challenge",
+	"timestamp": "2023-09-01T14:59:43.077Z",
+	"collection_id": "18245653-a8e6dbe4-c927-4c5f-abc0-4f64c1bf8869",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 43,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "46abf42e-5d19-4f7a-9bd1-6f4e79da445c",
+			"name": "Seed Data",
+			"url": "https://petstore3.swagger.io/api/v3/pet",
+			"time": 178,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				178
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "db10c502-e17b-4fbd-963a-6eb566683a08",
+			"name": "POST 200 Req",
+			"url": "https://petstore3.swagger.io/api/v3/pet",
+			"time": 172,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Asserting the Id": true,
+				"Asserting the name": true,
+				"Asserting the Category": true,
+				"Asserting the PhotoUrl": true,
+				"Asserting the Tags": true,
+				"Asserting the status in the response body": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting the Id": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting the name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting the Category": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting the PhotoUrl": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting the Tags": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting the status in the response body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				172
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Asserting the Id": true,
+					"Asserting the name": true,
+					"Asserting the Category": true,
+					"Asserting the PhotoUrl": true,
+					"Asserting the Tags": true,
+					"Asserting the status in the response body": true
+				}
+			]
+		},
+		{
+			"id": "2fe946f7-5514-46d4-9f32-8e887b9ae8f0",
+			"name": "POST 400 // Incorrect Value types",
+			"url": "https://petstore3.swagger.io/api/v3/pet",
+			"time": 175,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 400": true,
+				"Asserting the error message": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting the error message": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				175
+			],
+			"allTests": [
+				{
+					"Status code is 400": true,
+					"Asserting the error message": true
+				}
+			]
+		},
+		{
+			"id": "b42130e9-cdb5-44aa-8907-d3679a70f33b",
+			"name": "GET Pet By Id 200",
+			"url": "https://petstore3.swagger.io/api/v3/pet/25398",
+			"time": 164,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Asserting Returned Values": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting Returned Values": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				164
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Asserting Returned Values": true
+				}
+			]
+		},
+		{
+			"id": "4d711708-8dc0-4d56-aacc-725961076a30",
+			"name": "GET Pet By Id 404",
+			"url": "https://petstore3.swagger.io/api/v3/pet/213897213018232",
+			"time": 162,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true,
+				"Asserting the reponse text": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting the reponse text": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				162
+			],
+			"allTests": [
+				{
+					"Status code is 404": true,
+					"Asserting the reponse text": true
+				}
+			]
+		},
+		{
+			"id": "21cea813-75f1-4e9d-9ee9-612641c1351a",
+			"name": "GET Pet By Id 400",
+			"url": "https://petstore3.swagger.io/api/v3/pet/Test123",
+			"time": 170,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 400": true,
+				"Asserting the response body": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting the response body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				170
+			],
+			"allTests": [
+				{
+					"Status code is 400": true,
+					"Asserting the response body": true
+				}
+			]
+		},
+		{
+			"id": "a6d8e4fa-d74f-412a-b165-2f3afa53cb41",
+			"name": "GET Pet By Tags 200",
+			"url": "https://petstore3.swagger.io/api/v3/pet/findByTags?tags=tag1&tags=tag2",
+			"time": 170,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Asserting that every has at least 1 of the query param tags ": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting that every has at least 1 of the query param tags ": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				170
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Asserting that every has at least 1 of the query param tags ": true
+				}
+			]
+		},
+		{
+			"id": "a242b7ad-fc3c-40d3-bc12-1724db16eb41",
+			"name": "GET Pet By Tags 400",
+			"url": "https://petstore3.swagger.io/api/v3/pet/findByTags?tags=",
+			"time": 162,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 400": true,
+				"Asserting error message on response body ": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting error message on response body ": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				162
+			],
+			"allTests": [
+				{
+					"Status code is 400": true,
+					"Asserting error message on response body ": true
+				}
+			]
+		},
+		{
+			"id": "61293ae3-ee1f-43f7-b836-b51f4f4b7168",
+			"name": "GET Pets By Status (Pending) 200",
+			"url": "https://petstore3.swagger.io/api/v3/pet/findByStatus?status=pending",
+			"time": 164,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Asserting that response length is greater than 0 and not null or empty": true,
+				"Asserting that every item fetched is of status Pending": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting that response length is greater than 0 and not null or empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting that every item fetched is of status Pending": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				164
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Asserting that response length is greater than 0 and not null or empty": true,
+					"Asserting that every item fetched is of status Pending": true
+				}
+			]
+		},
+		{
+			"id": "911c2c4d-6add-4751-8d01-a9d9ef83c98e",
+			"name": "GET Pets By Status (Sold) 200",
+			"url": "https://petstore3.swagger.io/api/v3/pet/findByStatus?status=sold",
+			"time": 170,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Asserting that response length is greater than 0 and not null or empty": true,
+				"Asserting that every item fetched is of status Sold": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting that response length is greater than 0 and not null or empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting that every item fetched is of status Sold": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				170
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Asserting that response length is greater than 0 and not null or empty": true,
+					"Asserting that every item fetched is of status Sold": true
+				}
+			]
+		},
+		{
+			"id": "8b1e3ed3-ac60-4057-8ca0-d472bc92e830",
+			"name": "GET Pets By Status (Available) 200",
+			"url": "https://petstore3.swagger.io/api/v3/pet/findByStatus?status=available",
+			"time": 1601,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Asserting that response length is greater than 0 and not null or empty": true,
+				"Asserting that every item fetched is of status Available": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting that response length is greater than 0 and not null or empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting that every item fetched is of status Available": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1601
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Asserting that response length is greater than 0 and not null or empty": true,
+					"Asserting that every item fetched is of status Available": true
+				}
+			]
+		},
+		{
+			"id": "eb9bcc0c-08b1-4aea-97e7-56a6460476fe",
+			"name": "GET Pets By Status 400",
+			"url": "https://petstore3.swagger.io/api/v3/pet/findByStatus?status=Test123",
+			"time": 175,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 400": true,
+				"Asserting the response body": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting the response body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				175
+			],
+			"allTests": [
+				{
+					"Status code is 400": true,
+					"Asserting the response body": true
+				}
+			]
+		},
+		{
+			"id": "7d60c93c-4d5e-4f14-8826-36aa6fdbd51c",
+			"name": "PUT /pet 200",
+			"url": "https://petstore3.swagger.io/api/v3/pet",
+			"time": 164,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Asserting that response object differs from the original stored ped": true,
+				"Asserting Id": true,
+				"Asserting Category Id": true,
+				"Asserting First Name": true,
+				"Asserting PhotoUrls": true,
+				"Asserting ID in tags": true,
+				"Asserting Second Name in tags": true,
+				"Asserting status": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting that response object differs from the original stored ped": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting Id": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting Category Id": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting First Name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting PhotoUrls": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting ID in tags": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting Second Name in tags": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				164
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Asserting that response object differs from the original stored ped": true,
+					"Asserting Id": true,
+					"Asserting Category Id": true,
+					"Asserting First Name": true,
+					"Asserting PhotoUrls": true,
+					"Asserting ID in tags": true,
+					"Asserting Second Name in tags": true,
+					"Asserting status": true
+				}
+			]
+		},
+		{
+			"id": "05115030-0642-40d1-9aa3-6238dfaa8346",
+			"name": "PUT /pet 400 Invalid Id",
+			"url": "https://petstore3.swagger.io/api/v3/pet",
+			"time": 163,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 400": true,
+				"Asserting Error message and Code": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting Error message and Code": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				163
+			],
+			"allTests": [
+				{
+					"Status code is 400": true,
+					"Asserting Error message and Code": true
+				}
+			]
+		},
+		{
+			"id": "28b775d0-6153-4d46-a6aa-b46723c43d21",
+			"name": "PUT /pet 404 Pet Not Found",
+			"url": "https://petstore3.swagger.io/api/v3/pet",
+			"time": 168,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true,
+				"Asserting the response body": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asserting the response body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				168
+			],
+			"allTests": [
+				{
+					"Status code is 404": true,
+					"Asserting the response body": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 3958,
+	"collection": {
+		"requests": [
+			{
+				"id": "46abf42e-5d19-4f7a-9bd1-6f4e79da445c",
+				"method": "POST"
+			},
+			{
+				"id": "db10c502-e17b-4fbd-963a-6eb566683a08",
+				"method": "POST"
+			},
+			{
+				"id": "2fe946f7-5514-46d4-9f32-8e887b9ae8f0",
+				"method": "POST"
+			},
+			{
+				"id": "b42130e9-cdb5-44aa-8907-d3679a70f33b",
+				"method": "GET"
+			},
+			{
+				"id": "4d711708-8dc0-4d56-aacc-725961076a30",
+				"method": "GET"
+			},
+			{
+				"id": "21cea813-75f1-4e9d-9ee9-612641c1351a",
+				"method": "GET"
+			},
+			{
+				"id": "a6d8e4fa-d74f-412a-b165-2f3afa53cb41",
+				"method": "GET"
+			},
+			{
+				"id": "a242b7ad-fc3c-40d3-bc12-1724db16eb41",
+				"method": "GET"
+			},
+			{
+				"id": "61293ae3-ee1f-43f7-b836-b51f4f4b7168",
+				"method": "GET"
+			},
+			{
+				"id": "911c2c4d-6add-4751-8d01-a9d9ef83c98e",
+				"method": "GET"
+			},
+			{
+				"id": "8b1e3ed3-ac60-4057-8ca0-d472bc92e830",
+				"method": "GET"
+			},
+			{
+				"id": "eb9bcc0c-08b1-4aea-97e7-56a6460476fe",
+				"method": "GET"
+			},
+			{
+				"id": "7d60c93c-4d5e-4f14-8826-36aa6fdbd51c",
+				"method": "PUT"
+			},
+			{
+				"id": "05115030-0642-40d1-9aa3-6238dfaa8346",
+				"method": "PUT"
+			},
+			{
+				"id": "28b775d0-6153-4d46-a6aa-b46723c43d21",
+				"method": "PUT"
+			}
+		]
+	}
+}

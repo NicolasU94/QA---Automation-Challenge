@@ -1,0 +1,987 @@
+{
+	"info": {
+		"_postman_id": "a8e6dbe4-c927-4c5f-abc0-4f64c1bf8869",
+		"name": "Beon Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18245653"
+	},
+	"item": [
+		{
+			"name": "POST /pet Tests",
+			"item": [
+				{
+					"name": "POST 200 Req",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Asserting the Id\", () => {",
+									"",
+									"    pm.expect(response.id).to.eql(10);",
+									"})",
+									"",
+									"",
+									"pm.test(\"Asserting the name\", () => {",
+									"",
+									"    pm.expect(response.name).to.eql('doggie');",
+									"})",
+									"",
+									"pm.test(\"Asserting the Category\", () => {",
+									"",
+									"    pm.expect(response.category.id).to.eql(1);",
+									"    pm.expect(response.category.name).to.eql('Dogs');",
+									"})",
+									"",
+									"pm.test(\"Asserting the PhotoUrl\", () => {",
+									"",
+									"    pm.expect(response.photoUrls[0]).to.eql('string');",
+									"})",
+									"",
+									"pm.test(\"Asserting the Tags\", () => {",
+									"    let tags = response.tags[0];",
+									"",
+									"    pm.expect(tags.id).to.eql(0);",
+									"    pm.expect(tags.name).to.eql('string');",
+									"    ",
+									"})",
+									"",
+									"",
+									"pm.test(\"Asserting the status in the response body\", () => {",
+									"",
+									"    pm.expect(response.status).to.eql('available');",
+									"})",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 10,\n  \"name\": \"doggie\",\n  \"category\": {\n    \"id\": 1,\n    \"name\": \"Dogs\"\n  },\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 0,\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST 400 // Incorrect Value types",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();",
+									"",
+									"let errMsg = pm.collectionVariables.get(\"Input_Error_Msg\");",
+									"",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Asserting the error message\", () => {",
+									"",
+									"    pm.expect(response.message).to.eql(errMsg);",
+									"    pm.expect(response.code).to.eql(400);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 10,\n  \"name\": 24,\n  \"category\": {\n    \"id\": 1,\n    \"name\": \"Dogs\"\n  },\n  \"photoUrls\": \"hello\",\n  \"tags\": [\n    {\n      \"id\": 0,\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET ById Tests",
+			"item": [
+				{
+					"name": "GET Pet By Id 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"let storedPet = pm.collectionVariables.get(\"generatedPet\");",
+									"",
+									"pm.test(\"Asserting Returned Values\", () => {",
+									"",
+									"    pm.expect(response).to.eql(storedPet);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pet/:petId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								":petId"
+							],
+							"variable": [
+								{
+									"key": "petId",
+									"value": "{{generatedId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pet By Id 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.text();",
+									"",
+									"let errMsg = pm.collectionVariables.get('petbyId404Msg');",
+									"",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Asserting the reponse text\", () => {",
+									"",
+									"    pm.expect(res).to.eql(errMsg);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pet/:petId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								":petId"
+							],
+							"variable": [
+								{
+									"key": "petId",
+									"value": "213897213018232"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pet By Id 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"let invalidId = pm.collectionVariables.get(\"invalidId\");",
+									"",
+									"pm.test(\"Asserting the response body\", () => {",
+									"",
+									"    pm.expect(response.code).to.eql(400);",
+									"    pm.expect(response.message).to.eql(\"Input error: couldn't convert `\" + invalidId + \"` to type `class java.lang.Long`\")",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pet/:petId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								":petId"
+							],
+							"variable": [
+								{
+									"key": "petId",
+									"value": "{{invalidId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pet By Tags 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"const queryParams = [\"tag1\",\"tag2\"];",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Asserting that every has at least 1 of the query param tags \", () => {",
+									"  response.forEach(item => {",
+									"      let itemTags = item.tags.map(tag => tag.name);",
+									"      ",
+									"      let matchingTags = queryParams.some(tag => itemTags.includes(tag));",
+									"",
+									"      pm.expect(matchingTags).to.eql(true);",
+									"",
+									"  })",
+									"",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pet/findByTags?tags=tag1&tags=tag2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								"findByTags"
+							],
+							"query": [
+								{
+									"key": "tags",
+									"value": "tag1"
+								},
+								{
+									"key": "tags",
+									"value": "tag2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pet By Tags 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"const response = pm.response.text();",
+									"",
+									"let errMsg = pm.collectionVariables.get('invalidTagsMsg');",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Asserting error message on response body \", () => {",
+									"  pm.expect(response).to.eql(errMsg);",
+									"",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pet/findByTags?tags=",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								"findByTags"
+							],
+							"query": [
+								{
+									"key": "tags",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pets By Status (Pending) 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"let storedPet = pm.collectionVariables.get(\"generatedPet\");",
+									"",
+									"pm.test(\"Asserting that response length is greater than 0 and not null or empty\", () => {",
+									"",
+									"    pm.expect(response).to.not.null;",
+									"    pm.expect(response).to.not.empty",
+									"    pm.expect(response.length).to.greaterThan(0);",
+									"});",
+									"",
+									"pm.test(\"Asserting that every item fetched is of status Pending\", () => {",
+									"    for (var key in response) {",
+									"    pm.expect(response[key].status).to.eql(\"pending\");",
+									"}",
+									"",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pet/findByStatus?status=pending",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pets By Status (Sold) 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"let storedPet = pm.collectionVariables.get(\"generatedPet\");",
+									"",
+									"pm.test(\"Asserting that response length is greater than 0 and not null or empty\", () => {",
+									"",
+									"    pm.expect(response).to.not.null;",
+									"    pm.expect(response).to.not.empty",
+									"    pm.expect(response.length).to.greaterThan(0);",
+									"});",
+									"",
+									"pm.test(\"Asserting that every item fetched is of status Sold\", () => {",
+									"    for (var key in response) {",
+									"   ",
+									"    pm.expect(response[key].status).to.eql(\"sold\");",
+									"",
+									"}",
+									"",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pet/findByStatus?status=sold",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "sold"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pets By Status (Available) 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"let storedPet = pm.collectionVariables.get(\"generatedPet\");",
+									"",
+									"pm.test(\"Asserting that response length is greater than 0 and not null or empty\", () => {",
+									"",
+									"    pm.expect(response).to.not.null;",
+									"    pm.expect(response).to.not.empty",
+									"    pm.expect(response.length).to.greaterThan(0);",
+									"});",
+									"",
+									"pm.test(\"Asserting that every item fetched is of status Available\", () => {",
+									"    for (var key in response) {",
+									"   ",
+									"    pm.expect(response[key].status).to.eql(\"available\");",
+									"",
+									"}",
+									"",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pet/findByStatus?status=available",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "available"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pets By Status 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"let invalidStatus = pm.collectionVariables.get(\"invalidStatus\");",
+									"",
+									"pm.test(\"Asserting the response body\", () => {",
+									"",
+									"    pm.expect(response.code).to.eql(400);",
+									"    pm.expect(response.message).to.eql(\"Input error: query parameter `status value `\" + invalidStatus + \"` is not in the allowable values `[available, pending, sold]`\")",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pet/findByStatus?status={{invalidStatus}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "{{invalidStatus}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PUT Tests",
+			"item": [
+				{
+					"name": "PUT /pet 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();",
+									"const tags = response.tags[0];",
+									"",
+									"let storedPet = pm.collectionVariables.get(\"generatedPet\");",
+									"let firstName = pm.collectionVariables.get(\"randomFirstName\");",
+									"let secondName = pm.collectionVariables.get(\"randomSecondName\");",
+									"let genId = pm.collectionVariables.get(\"generatedId\");",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Asserting that response object differs from the original stored ped\", () => {",
+									"",
+									"    pm.expect(response).to.not.eql(storedPet);",
+									"});",
+									"",
+									"pm.test(\"Asserting Id\", () => {",
+									"",
+									"    pm.expect(response.id).to.eql(genId);",
+									"});",
+									"",
+									"pm.test(\"Asserting Category Id\", () => {",
+									"",
+									"    pm.expect(response.category.id).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"Asserting First Name\", () => {",
+									"",
+									"    pm.expect(response.name).to.eql(firstName);",
+									"});",
+									"",
+									"pm.test(\"Asserting PhotoUrls\", () => {",
+									"",
+									"    pm.expect(response.photoUrls[0]).to.eql(\"strings\");",
+									"});",
+									"",
+									"pm.test(\"Asserting ID in tags\", () => {",
+									"    pm.expect(tags.id).to.eql(0);",
+									"});",
+									"",
+									"pm.test(\"Asserting Second Name in tags\", () => {",
+									"    pm.expect(tags.name).to.eql(secondName);",
+									"});",
+									"",
+									"pm.test(\"Asserting status\", () => {",
+									"    pm.expect(response.status).to.eql('available');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var randomName1 = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+									"",
+									"var randomName2 = pm.variables.replaceIn(\"{{$randomFirstName}}\");",
+									"",
+									"pm.collectionVariables.set('randomFirstName', randomName1);",
+									"",
+									"pm.collectionVariables.set('randomSecondName', randomName2);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 25398,\n  \"name\": \"{{randomFirstName}}\",\n  \"category\": {\n    \"id\": 1,\n    \"name\": \"Dogs\"\n  },\n  \"photoUrls\": [\n    \"strings\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 0,\n      \"name\": \"{{randomSecondName}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /pet 400 Invalid Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();",
+									"",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Asserting Error message and Code\", () => {",
+									"",
+									"    pm.expect(response.code).to.eql(400);",
+									"    pm.expect(response.message).to.eql('Input error: unable to convert input to io.swagger.petstore.model.Pet');",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"hola\",\n  \"name\": \"Bobby\",\n  \"category\": {\n    \"id\": 1,\n    \"name\": \"Dogs\"\n  },\n  \"photoUrls\": [\n    \"strings\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 0,\n      \"name\": \"Rick\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /pet 404 Pet Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.text();",
+									"",
+									"",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Asserting the response body\", () => {",
+									"",
+									"    pm.expect(response).to.eql('Pet not found');",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 220,\n  \"name\": \"Bobby\",\n  \"category\": {\n    \"id\": 1,\n    \"name\": \"Dogs\"\n  },\n  \"photoUrls\": [\n    \"strings\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 0,\n      \"name\": \"Rick\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Seed Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"",
+							"",
+							"",
+							"pm.collectionVariables.set('generatedPet', response);",
+							"pm.collectionVariables.set('generatedId', response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 25398,\n  \"name\": \"sprocket\",\n  \"category\": {\n    \"id\": 1,\n    \"name\": \"Dogs\"\n  },\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 0,\n      \"name\": \"myTag\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/pet",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Input_Error_Msg",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "generatedPet",
+			"value": ""
+		},
+		{
+			"key": "generatedId",
+			"value": ""
+		},
+		{
+			"key": "invalidStatus",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "invalidId",
+			"value": "Test123"
+		},
+		{
+			"key": "invalidTagsMsg",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "petbyId404Msg",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "randomFirstName",
+			"value": ""
+		},
+		{
+			"key": "randomSecondName",
+			"value": ""
+		}
+	]
+}
