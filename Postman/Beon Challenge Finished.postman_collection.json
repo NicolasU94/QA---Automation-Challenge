@@ -945,7 +945,7 @@
 	"variable": [
 		{
 			"key": "Input_Error_Msg",
-			"value": "",
+			"value": "Input error: unable to convert input to io.swagger.petstore.model.Pet",
 			"type": "string"
 		},
 		{
@@ -958,7 +958,7 @@
 		},
 		{
 			"key": "invalidStatus",
-			"value": "",
+			"value": "Test123",
 			"type": "string"
 		},
 		{
@@ -967,12 +967,12 @@
 		},
 		{
 			"key": "invalidTagsMsg",
-			"value": "",
+			"value": "No tags provided. Try again?",
 			"type": "string"
 		},
 		{
 			"key": "petbyId404Msg",
-			"value": "",
+			"value": "Pet not found",
 			"type": "string"
 		},
 		{
